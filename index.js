@@ -1,5 +1,5 @@
 import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
-import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
+// import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
 import * as distrib from "cosmjs-types/cosmos/distribution/v1beta1/query";
 import * as bank from "cosmjs-types/cosmos/bank/v1beta1/query";
 
@@ -7,7 +7,7 @@ let finalAddress = ''
 
 class DarkMatter {
   constructor(chainId, client) {
-    this.editorExtensionId = "cidldciikbgbemcccegkacpncnajjpnp";
+    this.editorExtensionId = "afopimmaolfpldcmbomkkpblknjplhkb";
     this.chainId = chainId;
     this.client = client;
   }  
@@ -29,7 +29,8 @@ class DarkMatter {
   connect() {
     const customPromise = new Promise((resolve, reject) => {      
       chrome.runtime.sendMessage(this.editorExtensionId, {
-        type: 'connect'
+        type: 'connect',
+        chainId: this.chainId
       }, function(response) {
         if (response) {
           finalAddress = response.data
@@ -95,7 +96,7 @@ class DarkMatter {
     const queryDistribResult = await queryDistrib.DelegationTotalRewards({ delegatorAddress: finalAddress });  
     let returnValue = ''
     if ( queryDistribResult.total.length > 0){
-      returnValue = queryDistribResult.total[0].amount / 1000000000000000000000000 
+      returnValue = queryDistribResult.total[0].amount / 1000000000000000000000000
     } else {
       returnValue = 0
     }
