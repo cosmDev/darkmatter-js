@@ -19,10 +19,11 @@ class DarkMatter {
   async initMatter() {
     if (typeof chrome.runtime === 'undefined') {
       console.log('Chrome runtime is not defined. Are you running in an Android WebView?');
-      return;
+      return false;
     } else {
       console.log('blackmatter-js is in itialised.');  
-      console.log('Debug', { editorExtensionId: this.editorExtensionId, chainId: this.chainId })   
+      console.log('Debug', { editorExtensionId: this.editorExtensionId, chainId: this.chainId })  
+      return true; 
     }  
   }
   
